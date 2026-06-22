@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hindi Voice Generator</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin-top: 40px;
+        }
+
+        h1{
+            color: #333;
+        }
+
+        textarea{
+            width: 80%;
+            height: 180px;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 10px;
+        }
+
+        select{
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border-radius: 5px;
+        }
+
+        button{
+            padding: 12px 25px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #007BFF;
+            color: white;
+        }
+
+        button:hover{
+            background-color: #0056b3;
+        }
+
+        audio{
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>🎙 Hindi Text To Voice Generator</h1>
+
+    <form method="POST">
+
+        <textarea
+            name="message"
+            placeholder="यहाँ हिंदी टेक्स्ट लिखें..."
+            required>
+        </textarea>
+
+        <br><br>
+
+        <label><b>Select Speech Style:</b></label>
+
+        <br><br>
+
+        <select name="voice">
+
+            <option value="female">
+                Hindi Female Voice
+            </option>
+
+            <option value="male">
+                Hindi Male Voice
+            </option>
+
+            <option value="podcast">
+                Podcast Narrator
+            </option>
+
+            <option value="assistant">
+                AI Assistant Voice
+            </option>
+
+        </select>
+
+        <br>
+
+        <button type="submit">
+            Generate Voice
+        </button>
+
+    </form>
+
+    {% if audio_file %}
+
+        <h2>Generated Voice</h2>
+
+        <audio controls>
+            <source
+                src="{{ url_for('static', filename='audio/' + audio_file) }}"
+                type="audio/mpeg">
+        </audio>
+
+        <br><br>
+
+        <a href="/download/{{audio_file}}">
+            <button>
+                Download MP3
+            </button>
+        </a>
+
+    {% endif %}
+
+</body>
+</html>
